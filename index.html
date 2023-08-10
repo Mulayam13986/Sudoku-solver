@@ -14,120 +14,141 @@
 
 <body>
     <div class="sudoku-container">
-        <div><h1>Sudoku Solver</h1></div><br>
+        <div>
+            <h1>Sudoku Solver</h1>
+        </div><br>
         <div class="level-select">
             <span class="badge bg-primary">Select the Difficulty level </span>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                <label class="form-check-label" for="inlineRadio1">Easy</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                <label class="form-check-label" for="inlineRadio2">Hard</label>
-              </div>
-              
+            <br>
+            <div>
+                <input class="form-check-input" type="radio" name="level" id="beginner">
+                <label class="form-check-label" for="beginner">Beginner</label>
+            </div>
+            <div>
+                <input class="form-check-input" type="radio" name="level" id="easy" checked>
+                <label class="form-check-label" for="easy">Easy</label>
+            </div>
+            <div>
+                <input class="form-check-input" type="radio" name="level" id="medium">
+                <label class="form-check-label" for="medium">Medium</label>
+            </div>
+            <div>
+                <input class="form-check-input" type="radio" name="level" id="extreme">
+                <label class="form-check-label" for="extreme">Extreme</label>
+            </div>
+
         </div>
         <div class="game-container">
             <div id="timer">00:00</div>
             <br>
-            <button class="btn btn-outline-primary"  id="startButton" onclick="startGame()">Start</button>
             <br>
             <div id="intervalSelect">
-                <label for="interval">Select Interval: </label>
-                <select id="interval" name="interval">
-                    <option value="5">5 Minutes</option>
-                    <option value="10">10 Minutes</option>
-                    <option value="15">15 Minutes</option>
-                    <option value="30">30 Minutes</option>
-                </select>
+                <span class="badge bg-primary">Select Interval </span>
+                <br><br>
+                <div>
+                    <input class="form-check-input" type="radio" name="time" id="t1" value="5">
+                    <label class="form-check-label" for="t1">05 Minutes</label>
+                </div>
+                <div>
+                    <input class="form-check-input" type="radio" name="time" id="t2" value="10" checked>
+                    <label class="form-check-label" for="t2">10 Minutes</label>
+                </div>
+                <div>
+                    <input class="form-check-input" type="radio" name="time" id="t3" value="20">
+                    <label class="form-check-label" for="t3">20 Minutes</label>
+                </div>
+                <div>
+                    <input class="form-check-input" type="radio" name="time" id="t4" value="30">
+                    <label class="form-check-label" for="t4">30 Minutes</label>
+                </div>
             </div>
         </div>
-    
-        
+
+
         <div class="sudoku-grid">
             <!-- Replace the numbers below with the initial Sudoku puzzle -->
 
-            <div class="cell" contenteditable="true" id = "0"></div>
-            <div class="cell" contenteditable="true" id = "1"></div>
-            <div class="cell" contenteditable="true" id = "2"></div>
-            <div class="cell" contenteditable="true" id = "3"></div>
-            <div class="cell" contenteditable="true" id = "4"></div>
-            <div class="cell" contenteditable="true" id = "5"></div>
-            <div class="cell" contenteditable="true" id = "6"></div>
-            <div class="cell" contenteditable="true" id = "7"></div>
-            <div class="cell" contenteditable="true" id = "8"></div>
-            <div class="cell" contenteditable="true" id = "9"></div>
-            <div class="cell" contenteditable="true" id = "10"></div>
-            <div class="cell" contenteditable="true" id = "11"></div>
-            <div class="cell" contenteditable="true" id = "12"></div>
-            <div class="cell" contenteditable="true" id = "13"></div>
-            <div class="cell" contenteditable="true" id = "14"></div>
-            <div class="cell" contenteditable="true" id = "15"></div>
-            <div class="cell" contenteditable="true" id = "16"></div>
-            <div class="cell" contenteditable="true" id = "17"></div>
-            <div class="cell" contenteditable="true" id = "18"></div>
-            <div class="cell" contenteditable="true" id = "19"></div>
-            <div class="cell" contenteditable="true" id = "20"></div>
-            <div class="cell" contenteditable="true" id = "21"></div>
-            <div class="cell" contenteditable="true" id = "22"></div>
-            <div class="cell" contenteditable="true" id = "23"></div>
-            <div class="cell" contenteditable="true" id = "24"></div>
-            <div class="cell" contenteditable="true" id = "25"></div>
-            <div class="cell" contenteditable="true" id = "26"></div>
-            <div class="cell" contenteditable="true" id = "27"></div>
-            <div class="cell" contenteditable="true" id = "28"></div>
-            <div class="cell" contenteditable="true" id = "29"></div>
-            <div class="cell" contenteditable="true" id = "30"></div>
-            <div class="cell" contenteditable="true" id = "31"></div>
-            <div class="cell" contenteditable="true" id = "32"></div>
-            <div class="cell" contenteditable="true" id = "33"></div>
-            <div class="cell" contenteditable="true" id = "34"></div>
-            <div class="cell" contenteditable="true" id = "35"></div>
-            <div class="cell" contenteditable="true" id = "36"></div>
-            <div class="cell" contenteditable="true" id = "37"></div>
-            <div class="cell" contenteditable="true" id = "38"></div>
-            <div class="cell" contenteditable="true" id = "39"></div>
-            <div class="cell" contenteditable="true" id = "40"></div>
-            <div class="cell" contenteditable="true" id = "41"></div>
-            <div class="cell" contenteditable="true" id = "42"></div>
-            <div class="cell" contenteditable="true" id = "43"></div>
-            <div class="cell" contenteditable="true" id = "44"></div>
-            <div class="cell" contenteditable="true" id = "45"></div>
-            <div class="cell" contenteditable="true" id = "46"></div>
-            <div class="cell" contenteditable="true" id = "47"></div>
-            <div class="cell" contenteditable="true" id = "48"></div>
-            <div class="cell" contenteditable="true" id = "49"></div>
-            <div class="cell" contenteditable="true" id = "50"></div>
-            <div class="cell" contenteditable="true" id = "51"></div>
-            <div class="cell" contenteditable="true" id = "52"></div>
-            <div class="cell" contenteditable="true" id = "53"></div>
-            <div class="cell" contenteditable="true" id = "54"></div>
-            <div class="cell" contenteditable="true" id = "55"></div>
-            <div class="cell" contenteditable="true" id = "56"></div>
-            <div class="cell" contenteditable="true" id = "57"></div>
-            <div class="cell" contenteditable="true" id = "58"></div>
-            <div class="cell" contenteditable="true" id = "59"></div>
-            <div class="cell" contenteditable="true" id = "60"></div>
-            <div class="cell" contenteditable="true" id = "61"></div>
-            <div class="cell" contenteditable="true" id = "62"></div>
-            <div class="cell" contenteditable="true" id = "63"></div>
-            <div class="cell" contenteditable="true" id = "64"></div>
-            <div class="cell" contenteditable="true" id = "65"></div>
-            <div class="cell" contenteditable="true" id = "66"></div>
-            <div class="cell" contenteditable="true" id = "67"></div>
-            <div class="cell" contenteditable="true" id = "68"></div>
-            <div class="cell" contenteditable="true" id = "69"></div>
-            <div class="cell" contenteditable="true" id = "70"></div>
-            <div class="cell" contenteditable="true" id = "71"></div>
-            <div class="cell" contenteditable="true" id = "72"></div>
-            <div class="cell" contenteditable="true" id = "73"></div>
-            <div class="cell" contenteditable="true" id = "74"></div>
-            <div class="cell" contenteditable="true" id = "75"></div>
-            <div class="cell" contenteditable="true" id = "76"></div>
-            <div class="cell" contenteditable="true" id = "77"></div>
-            <div class="cell" contenteditable="true" id = "78"></div>
-            <div class="cell" contenteditable="true" id = "79"></div>
-            <div class="cell" contenteditable="true" id = "80"></div>
+            <div class="cell" id="0"></div>
+            <div class="cell" id="1"></div>
+            <div class="cell" id="2"></div>
+            <div class="cell" id="3"></div>
+            <div class="cell" id="4"></div>
+            <div class="cell" id="5"></div>
+            <div class="cell" id="6"></div>
+            <div class="cell" id="7"></div>
+            <div class="cell" id="8"></div>
+            <div class="cell" id="9"></div>
+            <div class="cell" id="10"></div>
+            <div class="cell" id="11"></div>
+            <div class="cell" id="12"></div>
+            <div class="cell" id="13"></div>
+            <div class="cell" id="14"></div>
+            <div class="cell" id="15"></div>
+            <div class="cell" id="16"></div>
+            <div class="cell" id="17"></div>
+            <div class="cell" id="18"></div>
+            <div class="cell" id="19"></div>
+            <div class="cell" id="20"></div>
+            <div class="cell" id="21"></div>
+            <div class="cell" id="22"></div>
+            <div class="cell" id="23"></div>
+            <div class="cell" id="24"></div>
+            <div class="cell" id="25"></div>
+            <div class="cell" id="26"></div>
+            <div class="cell" id="27"></div>
+            <div class="cell" id="28"></div>
+            <div class="cell" id="29"></div>
+            <div class="cell" id="30"></div>
+            <div class="cell" id="31"></div>
+            <div class="cell" id="32"></div>
+            <div class="cell" id="33"></div>
+            <div class="cell" id="34"></div>
+            <div class="cell" id="35"></div>
+            <div class="cell" id="36"></div>
+            <div class="cell" id="37"></div>
+            <div class="cell" id="38"></div>
+            <div class="cell" id="39"></div>
+            <div class="cell" id="40"></div>
+            <div class="cell" id="41"></div>
+            <div class="cell" id="42"></div>
+            <div class="cell" id="43"></div>
+            <div class="cell" id="44"></div>
+            <div class="cell" id="45"></div>
+            <div class="cell" id="46"></div>
+            <div class="cell" id="47"></div>
+            <div class="cell" id="48"></div>
+            <div class="cell" id="49"></div>
+            <div class="cell" id="50"></div>
+            <div class="cell" id="51"></div>
+            <div class="cell" id="52"></div>
+            <div class="cell" id="53"></div>
+            <div class="cell" id="54"></div>
+            <div class="cell" id="55"></div>
+            <div class="cell" id="56"></div>
+            <div class="cell" id="57"></div>
+            <div class="cell" id="58"></div>
+            <div class="cell" id="59"></div>
+            <div class="cell" id="60"></div>
+            <div class="cell" id="61"></div>
+            <div class="cell" id="62"></div>
+            <div class="cell" id="63"></div>
+            <div class="cell" id="64"></div>
+            <div class="cell" id="65"></div>
+            <div class="cell" id="66"></div>
+            <div class="cell" id="67"></div>
+            <div class="cell" id="68"></div>
+            <div class="cell" id="69"></div>
+            <div class="cell" id="70"></div>
+            <div class="cell" id="71"></div>
+            <div class="cell" id="72"></div>
+            <div class="cell" id="73"></div>
+            <div class="cell" id="74"></div>
+            <div class="cell" id="75"></div>
+            <div class="cell" id="76"></div>
+            <div class="cell" id="77"></div>
+            <div class="cell" id="78"></div>
+            <div class="cell" id="79"></div>
+            <div class="cell" id="80"></div>
 
         </div>
 

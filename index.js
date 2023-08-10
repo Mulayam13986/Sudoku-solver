@@ -1,6 +1,8 @@
+
 let countdown;
 let interval;
 let remainingTime = 0;
+
 
 function updateTimer() {
     const timerElement = document.getElementById('timer');
@@ -9,18 +11,19 @@ function updateTimer() {
     timerElement.textContent = `${minutes}:${seconds}`;
 }
 
-function startGame() {
+function start() {
     const intervalSelect = document.getElementById('interval');
-    interval = parseInt(intervalSelect.value, 10) * 60;
+    let time_interval = document.querySelector("input[name='time']:checked").value;
+    interval = parseInt(time_interval, 10) * 60;
 
     remainingTime = interval;
     updateTimer();
 
     countdown = setInterval(function () {
         remainingTime--;
-        if (remainingTime <= 0) {
+        if (remainingTime < 0) {
             clearInterval(countdown);
-            alert('Time\'s up! Game over.');
+            document.getElementById("result").innerHTML = `<h2 class="text-success" id="result">Time's Up</h2>`
         } else {
             updateTimer();
         }
@@ -44,7 +47,7 @@ for (let i = 0; i < 9; i++) {
     }
     board.push(row);
 }
-
+generate();
 let count = 0;
 
 const cells = document.querySelectorAll(".cell");
@@ -62,16 +65,21 @@ for (let cell of gridCells) {
 
 cells.forEach(cell => {
     cell.addEventListener('input', () => {
+        
         const value = Number(cell.innerText);
+
+        let id_cell = parseInt(cell.getAttribute("id"));
+        let i = parseInt(id_cell / 9);
+        let j = id_cell % 9;
+
         if (Number.isNaN(value) || value < 1 || value > 9) {
+            
+            board[i][j] = "";
             cell.innerText = "";
         }
         else {
-        let id_cell = parseInt(cell.getAttribute("id"));
-        console.log(id_cell);
-        let i = parseInt(id_cell / 9);
-        let j = id_cell % 9;
-        board[i][j] = value;
+        board[i][j] = String(value);
+        document.getElementById(id_cell).style.color = "red";
         }
         
     });
@@ -110,6 +118,7 @@ function boardConstruction(gridCells) {
 
 function submit() {
 
+    console.log(board);
     
     let rows = new Set();
     let cols = new Set();
@@ -226,22 +235,19 @@ function fillValues() {
 }
 
 
-// Function to generate a Sudoku puzzle of a specified level
-function generatePuzzle(level) {
-    // Implement your puzzle generation logic here
-    // You can create an empty grid and fill some cells based on the level
-    return emptyGrid;
-}
 
 // Function to clear the grid
 function restart() {
-
+    
     for (let i = 0; i < 9; i++) {
         for (let j = 0; j < 9; j++) {
             board[i][j] = '';
+            id_cell = String(i*9+j);
+            document.getElementById(id_cell).style.color = "#333333";
         }
     }
-    fillValues(board);
+    // fillValues(board);
+    generate();
 }
 
 
@@ -249,5 +255,106 @@ function restart() {
 
 function generate(){
 
+    for (let i = 0; i < 9; i++) {
+        for (let j = 0; j < 9; j++) {
+            board[i][j] = '';
+            // document.getElementById(String(8*i+j)).contentEditable = false;
+        }
+    }
+    document.getElementsByClassName("cell").contentEditable= false;
+    console.log(board);
+    help_to_generate(board,9);
+    console.log(board);
+    empty_cell();
+    fillValues();
+    
+
+}
+
+
+function help_to_generate(board,n){
+
+    // for every cell in the sudoku
+    for (let row = 0; row < n; row++) {
+        for (let col = 0; col < n; col++) {
+            // if its empty
+            if (board[row][col] !== "") continue;
+            // try every number 1-9
+            let vis  =[0,0,0,0,0,0,0,0,0,0];
+            while(true) {
+                const c = Math.floor(Math.random()*9 +1 );
+                let flag = 1;
+
+                for (let idx = 1 ; idx <= 9 ;idx++){
+
+                    if (vis[idx] == 0){
+                        flag = 0;
+                        break;
+                    }
+                }
+                if(flag) break;
+                if(vis[c] == 1) continue;
+                vis[c] = 1;
+                // if that number is valid
+                if (isValid(board, row, col, c)) {
+                    board[row][col] = String(c);
+                    // continue search for that board, ret true if solution is reached
+                    if (help_to_generate(board, n)) {
+                        return true;
+                    }
+                    else {
+                        board[row][col] = "";
+                    }
+                }
+            }
+            // solution wasnt found for any num 1-9 here, must be a dead end...
+
+            // ret false to signal dead end 
+            return false;
+        }
+    }
+    // all cells filled, must be a solution
+    return true;
+}
+
+function empty_cell(){
+
+
+    let count = 0 ;
+
+    let k = Math.floor(Math.random()*5+1);
+
+    let var1 = document.querySelector("input[name='level']:checked").id;
+
+    if(var1 == "beginner"){
+        k+=16;
+    }
+    else if (var1 == "easy"){
+        k+= 25;
+    }
+    else if (var1 == "medium"){
+        k+=39;
+    }
+    else{
+        k+=55;
+    }
+  
+
+    while(count < k ){
+
+        let i = Math.floor(Math.random()*9);
+        let j = Math.floor(Math.random()*9 ) ;
+
+        if (board[i][j] == "") continue;
+        else {
+
+            board[i][j] = "";
+            let id_empty_cell = String(9*i+j);
+            document.getElementById(id_empty_cell).style.color = "red";
+            document.getElementById(id_empty_cell).contentEditable= true;
+            
+            count++; 
+        }
+    }
 
 }
