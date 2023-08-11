@@ -21,6 +21,7 @@ body {
     position: absolute;
     flex-direction: column;
     align-items: flex-start;
+    top:40%;
     left: 250px;
     margin-right: 20px;
 }
@@ -31,10 +32,12 @@ body {
     position: absolute;
     flex-direction: column;
     left: 1100px;
+    top:40%;
     /* margin-top: 0px ; */
-    margin-bottom: 70px;
+    /* margin-bottom: 70px; */
     align-items: center;
 }
+
 
 
 .sudoku-grid {
@@ -103,3 +106,28 @@ body {
 #restart{
     margin-right: 5px;
 } */
+
+
+
+
+
+  #timer {
+    color: #595e2f;
+    font-family: "Montserrat", sans-serif;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: "Lato", sans-serif;
+    font-size: 2em;
+    letter-spacing: 5px;
+    position: absolute;
+    top:25%;
+    left:1090px;
+    color: blue;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 8px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border: black solid 2px;
+  }
+   
